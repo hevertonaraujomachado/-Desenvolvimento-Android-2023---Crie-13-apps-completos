@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 
 import devandroid.machado.applistacurso.R;
 import devandroid.machado.applistacurso.model.Pessoa;
@@ -14,6 +16,15 @@ public class MainActivity extends AppCompatActivity {
 
     String dadosPessoa;
     String dadosOutraPessoa;
+
+    EditText editPrimeiroNome;
+    EditText editSobrenomeAluno;
+    EditText editNomeDoCursoDesejad;
+    EditText editTelefoneContato;
+
+    Button btnLimpar;
+    Button btnSalvar;
+    Button btnFinalisar;
 
 
     @Override
@@ -33,25 +44,27 @@ public class MainActivity extends AppCompatActivity {
         outraPessoa.setCursoDesejado("Java");
         outraPessoa.setTelefoneContato("8999899999");
 
-       /* dadosPessoa = "Primeiro Nome: ";
-        dadosPessoa += pessoa.getPrimeiroNome();
-        dadosPessoa = "Sobre Nome: ";
-        dadosPessoa += pessoa.getSobreNome();
-        dadosPessoa = "Curso Desejado: ";
-        dadosPessoa += pessoa.getCursoDesejado();
-        dadosPessoa = "Telefone Contato: ";
-        dadosPessoa += pessoa.getTelefoneContato();
+        editPrimeiroNome = findViewById(R.id.editPrimeiroNome);
+        editSobrenomeAluno = findViewById(R.id.editSobrenomeAluno);
+        editNomeDoCursoDesejad = findViewById(R.id.editNomeDoCursoDesejado);
+        editTelefoneContato = findViewById(R.id.editTelefoneContato);
 
-        dadosOutraPessoa = "Primeiro Nome: ";
-        dadosOutraPessoa += outraPessoa.getPrimeiroNome();
-        dadosOutraPessoa = "Sobre Nome: ";
-        dadosOutraPessoa += outraPessoa.getSobreNome();
-        dadosOutraPessoa = "Curso Desejado: ";
-        dadosOutraPessoa += outraPessoa.getCursoDesejado();
-        dadosOutraPessoa = "Telefone Contato: ";
-        dadosOutraPessoa += outraPessoa.getTelefoneContato();*/
+        btnLimpar = findViewById(R.id.btnLimpar);
+        btnSalvar = findViewById(R.id.btnSalvar);
+        btnFinalisar = findViewById(R.id.btnFinalisar);
+
+        editPrimeiroNome.setText(pessoa.getPrimeiroNome());
+        editSobrenomeAluno.setText(pessoa.getSobreNome());
+        editNomeDoCursoDesejad.setText(pessoa.getCursoDesejado());
+        editTelefoneContato.setText(pessoa.getTelefoneContato());
+
+
+
+
 
         Log.i("POOAndroid",pessoa.toString());
         Log.i("POOAndroid",outraPessoa.toString());
+
+
     }
 }
