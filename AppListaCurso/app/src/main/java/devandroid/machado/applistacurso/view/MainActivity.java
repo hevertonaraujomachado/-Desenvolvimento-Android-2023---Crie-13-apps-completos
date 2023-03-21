@@ -10,9 +10,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import devandroid.machado.applistacurso.R;
+import devandroid.machado.applistacurso.controller.PessoaController;
 import devandroid.machado.applistacurso.model.Pessoa;
 
 public class MainActivity extends AppCompatActivity {
+
+    PessoaController controller;
     Pessoa pessoa;
     Pessoa outraPessoa;
 
@@ -34,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        controller = new PessoaController();
+        controller.toString();
+
         pessoa = new Pessoa();
+
         pessoa.setPrimeiroNome("Heverton");
         pessoa.setSobreNome("Machado");
         pessoa.setCursoDesejado("Android");
@@ -74,7 +81,10 @@ public class MainActivity extends AppCompatActivity {
 btnSalvar.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
+
         Toast.makeText(MainActivity.this,"Volte Sempre",Toast.LENGTH_LONG).show();
+        controller.salvar(pessoa);
+
         finish();
     }
 });
@@ -85,6 +95,7 @@ btnFinalisar.setOnClickListener(new View.OnClickListener() {
         pessoa.setSobreNome(editSobrenomeAluno.getText().toString());
         pessoa.setCursoDesejado(editNomeDoCursoDesejad.getText().toString());
         pessoa.setTelefoneContato(editTelefoneContato.getText().toString());
+
         Toast.makeText(MainActivity.this,"Salvo"+pessoa,Toast.LENGTH_LONG).show();
 
     }
