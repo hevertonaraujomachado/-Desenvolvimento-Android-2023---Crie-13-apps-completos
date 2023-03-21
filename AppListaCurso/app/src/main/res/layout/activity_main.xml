@@ -7,10 +7,10 @@
     tools:context=".view.MainActivity">
 
     <TextView
-        android:background="#8F939C"
         android:id="@+id/txtTituloApp"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:background="#8F939C"
         android:text="@string/txt_titulo"
         android:textSize="18sp"
         android:textStyle="bold"
