@@ -2,6 +2,7 @@ package devandroid.machado.applistacurso.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,9 @@ import devandroid.machado.applistacurso.controller.PessoaController;
 import devandroid.machado.applistacurso.model.Pessoa;
 
 public class MainActivity extends AppCompatActivity {
+
+    SharedPreferences preferences;
+    public static final String NOME_PREFERENCES = "pref listavip";
 
     PessoaController controller;
     Pessoa pessoa;
@@ -33,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        preferences = getSharedPreferences(NOME_PREFERENCES,0);
+        SharedPreferences.Editor listaVip = preferences.edit();
 
         controller = new PessoaController();
         controller.toString();
@@ -80,8 +87,14 @@ btnSalvar.setOnClickListener(new View.OnClickListener() {
     public void onClick(View view) {
 
         Toast.makeText(MainActivity.this,"Volte Sempre",Toast.LENGTH_LONG).show();
-        controller.salvar(pessoa);
 
+        listaVip.putString("PrimeiroNome",pessoa.getPrimeiroNome());
+        listaVip.putString("SobrenomeAluno",pessoa.getSobreNome());
+        listaVip.putString("NomeDoCursoDesejado",pessoa.getCursoDesejado());
+        listaVip.putString("TelefoneContato",pessoa.getTelefoneContato());
+        listaVip.apply();
+
+        controller.salvar(pessoa);
         finish();
     }
 });
