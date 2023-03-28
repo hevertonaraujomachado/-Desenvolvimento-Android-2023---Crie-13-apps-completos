@@ -15,9 +15,6 @@ import devandroid.machado.applistacurso.model.Pessoa;
 
 public class MainActivity extends AppCompatActivity {
 
-    SharedPreferences preferences;
-    SharedPreferences.Editor listaVip;
-    public static final String NOME_PREFERENCES = "pref listavip";
 
     PessoaController controller;
     Pessoa pessoa;
@@ -38,17 +35,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        preferences = getSharedPreferences(NOME_PREFERENCES,0);
-        listaVip = preferences.edit();
 
-        controller = new PessoaController();
+        controller = new PessoaController(MainActivity.this);
         controller.toString();
 
         pessoa = new Pessoa();
-        pessoa.setPrimeiroNome(preferences.getString("primeiroNome",""));
-        pessoa.setSobreNome(preferences.getString("sobreNome",""));
-        pessoa.setCursoDesejado(preferences.getString("nomeCurso",""));
-        pessoa.setTelefoneContato(preferences.getString("telefoneContato",""));
+        controller.buscar(pessoa);
+
 
         editPrimeiroNome = findViewById(R.id.editPrimeiroNome);
         editSobrenomeAluno = findViewById(R.id.editSobrenomeAluno);
@@ -70,33 +63,27 @@ public class MainActivity extends AppCompatActivity {
             editNomeDoCursoDesejad.setText("");
             editTelefoneContato.setText("");
 
-            listaVip.clear();
-            listaVip.apply();
+            controller.limpar();
 
         });
 
-btnSalvar.setOnClickListener(view -> {
+        btnSalvar.setOnClickListener(view -> {
 
-    Toast.makeText(MainActivity.this,"Volte Sempre",Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "Volte Sempre", Toast.LENGTH_LONG).show();
 
-    listaVip.putString("PrimeiroNome",pessoa.getPrimeiroNome());
-    listaVip.putString("SobrenomeAluno",pessoa.getSobreNome());
-    listaVip.putString("NomeDoCursoDesejado",pessoa.getCursoDesejado());
-    listaVip.putString("TelefoneContato",pessoa.getTelefoneContato());
-    listaVip.apply();
 
-    controller.salvar(pessoa);
-    finish();
-});
-btnFinalisar.setOnClickListener(view -> {
-    pessoa.setPrimeiroNome(editPrimeiroNome.getText().toString());
-    pessoa.setSobreNome(editSobrenomeAluno.getText().toString());
-    pessoa.setCursoDesejado(editNomeDoCursoDesejad.getText().toString());
-    pessoa.setTelefoneContato(editTelefoneContato.getText().toString());
+            controller.salvar(pessoa);
 
-    Toast.makeText(MainActivity.this,"Salvo"+pessoa,Toast.LENGTH_LONG).show();
+        });
+        btnFinalisar.setOnClickListener(view -> {
+            pessoa.setPrimeiroNome(editPrimeiroNome.getText().toString());
+            pessoa.setSobreNome(editSobrenomeAluno.getText().toString());
+            pessoa.setCursoDesejado(editNomeDoCursoDesejad.getText().toString());
+            pessoa.setTelefoneContato(editTelefoneContato.getText().toString());
 
-});
+            Toast.makeText(MainActivity.this, "Salvo" + pessoa, Toast.LENGTH_LONG).show();
+
+        });
 
         btnSalvar.setOnClickListener(view -> {
             Toast.makeText(MainActivity.this, "Volte Sempre", Toast.LENGTH_LONG).show();
