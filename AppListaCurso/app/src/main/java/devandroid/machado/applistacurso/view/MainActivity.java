@@ -45,31 +45,24 @@ public class MainActivity extends AppCompatActivity {
         controller.toString();
 
         pessoa = new Pessoa();
-
-        pessoa.setPrimeiroNome("Heverton");
-        pessoa.setSobreNome("Machado");
-        pessoa.setCursoDesejado("Android");
-        pessoa.setTelefoneContato("8999999999");
-
-        outraPessoa = new Pessoa();
-        outraPessoa.setPrimeiroNome("heveq");
-        outraPessoa.setSobreNome("Machadoo");
-        outraPessoa.setCursoDesejado("Java");
-        outraPessoa.setTelefoneContato("8999899999");
+        pessoa.setPrimeiroNome(preferences.getString("primeiroNome",""));
+        pessoa.setSobreNome(preferences.getString("sobreNome",""));
+        pessoa.setCursoDesejado(preferences.getString("nomeCurso",""));
+        pessoa.setTelefoneContato(preferences.getString("telefoneContato",""));
 
         editPrimeiroNome = findViewById(R.id.editPrimeiroNome);
         editSobrenomeAluno = findViewById(R.id.editSobrenomeAluno);
         editNomeDoCursoDesejad = findViewById(R.id.editNomeDoCursoDesejado);
         editTelefoneContato = findViewById(R.id.editTelefoneContato);
 
-        btnLimpar = findViewById(R.id.btnLimpar);
-        btnSalvar = findViewById(R.id.btnSalvar);
-        btnFinalisar = findViewById(R.id.btnFinalisar);
-
         editPrimeiroNome.setText(pessoa.getPrimeiroNome());
         editSobrenomeAluno.setText(pessoa.getSobreNome());
         editNomeDoCursoDesejad.setText(pessoa.getCursoDesejado());
         editTelefoneContato.setText(pessoa.getTelefoneContato());
+
+        btnLimpar = findViewById(R.id.btnLimpar);
+        btnSalvar = findViewById(R.id.btnSalvar);
+        btnFinalisar = findViewById(R.id.btnFinalisar);
 
         btnLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +111,7 @@ btnFinalisar.setOnClickListener(new View.OnClickListener() {
                 finish();
             }
         });
+
         btnFinalisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,7 +127,7 @@ btnFinalisar.setOnClickListener(new View.OnClickListener() {
         });
 
         Log.i("POOAndroid", pessoa.toString());
-        Log.i("POOAndroid", outraPessoa.toString());
+
 
     }
 }
