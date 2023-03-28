@@ -1,14 +1,13 @@
 package devandroid.machado.applistacurso.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import devandroid.machado.applistacurso.R;
 import devandroid.machado.applistacurso.controller.PessoaController;
@@ -17,11 +16,12 @@ import devandroid.machado.applistacurso.model.Pessoa;
 public class MainActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
+    SharedPreferences.Editor listaVip;
     public static final String NOME_PREFERENCES = "pref listavip";
 
     PessoaController controller;
     Pessoa pessoa;
-    Pessoa outraPessoa;
+
 
     EditText editPrimeiroNome;
     EditText editSobrenomeAluno;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         preferences = getSharedPreferences(NOME_PREFERENCES,0);
-        SharedPreferences.Editor listaVip = preferences.edit();
+        listaVip = preferences.edit();
 
         controller = new PessoaController();
         controller.toString();
@@ -64,66 +64,54 @@ public class MainActivity extends AppCompatActivity {
         btnSalvar = findViewById(R.id.btnSalvar);
         btnFinalisar = findViewById(R.id.btnFinalisar);
 
-        btnLimpar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editPrimeiroNome.setText("");
-                editSobrenomeAluno.setText("");
-                editNomeDoCursoDesejad.setText("");
-                editTelefoneContato.setText("");
+        btnLimpar.setOnClickListener(view -> {
+            editPrimeiroNome.setText("");
+            editSobrenomeAluno.setText("");
+            editNomeDoCursoDesejad.setText("");
+            editTelefoneContato.setText("");
 
-            }
+            listaVip.clear();
+            listaVip.apply();
+
         });
 
-btnSalvar.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
+btnSalvar.setOnClickListener(view -> {
 
-        Toast.makeText(MainActivity.this,"Volte Sempre",Toast.LENGTH_LONG).show();
+    Toast.makeText(MainActivity.this,"Volte Sempre",Toast.LENGTH_LONG).show();
 
-        listaVip.putString("PrimeiroNome",pessoa.getPrimeiroNome());
-        listaVip.putString("SobrenomeAluno",pessoa.getSobreNome());
-        listaVip.putString("NomeDoCursoDesejado",pessoa.getCursoDesejado());
-        listaVip.putString("TelefoneContato",pessoa.getTelefoneContato());
-        listaVip.apply();
+    listaVip.putString("PrimeiroNome",pessoa.getPrimeiroNome());
+    listaVip.putString("SobrenomeAluno",pessoa.getSobreNome());
+    listaVip.putString("NomeDoCursoDesejado",pessoa.getCursoDesejado());
+    listaVip.putString("TelefoneContato",pessoa.getTelefoneContato());
+    listaVip.apply();
 
-        controller.salvar(pessoa);
-        finish();
-    }
+    controller.salvar(pessoa);
+    finish();
 });
-btnFinalisar.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        pessoa.setPrimeiroNome(editPrimeiroNome.getText().toString());
-        pessoa.setSobreNome(editSobrenomeAluno.getText().toString());
-        pessoa.setCursoDesejado(editNomeDoCursoDesejad.getText().toString());
-        pessoa.setTelefoneContato(editTelefoneContato.getText().toString());
+btnFinalisar.setOnClickListener(view -> {
+    pessoa.setPrimeiroNome(editPrimeiroNome.getText().toString());
+    pessoa.setSobreNome(editSobrenomeAluno.getText().toString());
+    pessoa.setCursoDesejado(editNomeDoCursoDesejad.getText().toString());
+    pessoa.setTelefoneContato(editTelefoneContato.getText().toString());
 
-        Toast.makeText(MainActivity.this,"Salvo"+pessoa,Toast.LENGTH_LONG).show();
+    Toast.makeText(MainActivity.this,"Salvo"+pessoa,Toast.LENGTH_LONG).show();
 
-    }
 });
 
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Volte Sempre", Toast.LENGTH_LONG).show();
-                finish();
-            }
+        btnSalvar.setOnClickListener(view -> {
+            Toast.makeText(MainActivity.this, "Volte Sempre", Toast.LENGTH_LONG).show();
+            finish();
         });
 
-        btnFinalisar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pessoa.setPrimeiroNome(editPrimeiroNome.getText().toString());
-                pessoa.setSobreNome(editSobrenomeAluno.getText().toString());
-                pessoa.setCursoDesejado(editNomeDoCursoDesejad.getText().toString());
-                pessoa.setTelefoneContato(editTelefoneContato.getText().toString());
+        btnFinalisar.setOnClickListener(view -> {
+            pessoa.setPrimeiroNome(editPrimeiroNome.getText().toString());
+            pessoa.setSobreNome(editSobrenomeAluno.getText().toString());
+            pessoa.setCursoDesejado(editNomeDoCursoDesejad.getText().toString());
+            pessoa.setTelefoneContato(editTelefoneContato.getText().toString());
 
 
-                Toast.makeText(MainActivity.this, "Salvo" + pessoa, Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "Salvo" + pessoa, Toast.LENGTH_LONG).show();
 
-            }
         });
 
         Log.i("POOAndroid", pessoa.toString());
