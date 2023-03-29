@@ -9,15 +9,21 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 import devandroid.machado.applistacurso.R;
+import devandroid.machado.applistacurso.controller.CursoController;
 import devandroid.machado.applistacurso.controller.PessoaController;
+import devandroid.machado.applistacurso.model.Curso;
 import devandroid.machado.applistacurso.model.Pessoa;
 
 public class MainActivity extends AppCompatActivity {
 
 
     PessoaController controller;
+    CursoController cursoController;
     Pessoa pessoa;
+    List<Curso> listaCursos;
 
 
     EditText editPrimeiroNome;
@@ -38,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
         controller = new PessoaController(MainActivity.this);
         controller.toString();
+
+        cursoController = new CursoController();
+        listaCursos = cursoController.getListCursos();
+
 
         pessoa = new Pessoa();
         controller.buscar(pessoa);
