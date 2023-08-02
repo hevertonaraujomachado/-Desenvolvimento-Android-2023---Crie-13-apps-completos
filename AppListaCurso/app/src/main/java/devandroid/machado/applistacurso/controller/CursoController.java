@@ -24,4 +24,21 @@ public class CursoController {
 
         return listCursos;
     }
+public ArrayList<String> dadosParaSpinner(){
+
+    ArrayList<String> dados = new ArrayList<>();
+
+    for (int i = 0; i < getListCursos().size();i++ ){
+
+        Curso objeto =(Curso) getListCursos().get(i);
+        dados.add(objeto.getNomeDoCursoDesejado());
+
+    }
+
+return dados;
+
+}
+
+
+
 }
