@@ -74,12 +74,17 @@ public class GasEtaActivity extends AppCompatActivity {
 
                     precoGasolina = Double.parseDouble(editGasolina.getText().toString());
                     precoEtanol = Double.parseDouble(editEtanol.getText().toString());
+
                     recomendacao = UtilGasEta.calculadorarMelhorOpcao(precoGasolina, precoEtanol);
+
                     txtResultado.setText(recomendacao);
+
+                    btnSalvar.setEnabled(true);
+
 
                 } else {
                     Toast.makeText(GasEtaActivity.this, "Por favor, Digita os Dados Corretamente ...", Toast.LENGTH_LONG).show();
-
+                    btnSalvar.setEnabled(false);
 
                 }
 
@@ -92,7 +97,7 @@ public class GasEtaActivity extends AppCompatActivity {
 
                 editEtanol.setText("");
                 editGasolina.setText("");
-
+                btnSalvar.setEnabled(false);
             }
         });
 
@@ -100,19 +105,23 @@ public class GasEtaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-combustivelGasolina = new Combustivel();
-combustivelEtanol = new Combustivel();
 
-combustivelGasolina.setNomeDoCombustivel("Gasolina");
-combustivelGasolina.setPrecoDoCombustivel(precoGasolina);
+                //TODO: EditText imputType
 
-combustivelEtanol.setNomeDoCombustivel("Etanol");
-combustivelEtanol.setPrecoDoCombustivel(precoEtanol);
 
-combustivelGasolina.setRecomendacao(UtilGasEta.calculadorarMelhorOpcao(precoGasolina,precoEtanol));
-combustivelEtanol.setRecomendacao(UtilGasEta.calculadorarMelhorOpcao(precoGasolina,precoEtanol));
+                combustivelGasolina = new Combustivel();
+                combustivelEtanol = new Combustivel();
 
-int parada = 0;
+                combustivelGasolina.setNomeDoCombustivel("Gasolina");
+                combustivelGasolina.setPrecoDoCombustivel(precoGasolina);
+
+                combustivelEtanol.setNomeDoCombustivel("Etanol");
+                combustivelEtanol.setPrecoDoCombustivel(precoEtanol);
+
+                combustivelGasolina.setRecomendacao(UtilGasEta.calculadorarMelhorOpcao(precoGasolina, precoEtanol));
+                combustivelEtanol.setRecomendacao(UtilGasEta.calculadorarMelhorOpcao(precoGasolina, precoEtanol));
+
+                int parada = 0;
 
 
             }
