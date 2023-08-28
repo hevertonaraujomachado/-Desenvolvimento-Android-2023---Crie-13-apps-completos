@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 import devandroid.machado.appgaseta.R;
 import devandroid.machado.appgaseta.apoio.UtilGasEta;
 import devandroid.machado.appgaseta.controller.CombustivelController;
@@ -37,6 +39,8 @@ public class GasEtaActivity extends AppCompatActivity {
     double precoEtanol;
     String recomendacao;
 
+    List<Combustivel> dados;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +49,15 @@ public class GasEtaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gaseta);
 
         controller = new CombustivelController(GasEtaActivity.this);
+
+        dados = controller.getListaDados();
+
+        Combustivel objAlteracao = dados.get(1);
+        objAlteracao.setNomeDoCombustivel("**GASOLINA**");
+        objAlteracao.setPrecoDoCombustivel(5.97);
+        objAlteracao.setRecomendacao("Abastecer com Gasolina**");
+
+        //controller.alterar(objAlteracao);
 
         editGasolina = findViewById(R.id.editGasolina);
         editEtanol = findViewById(R.id.editEtanol);
@@ -102,6 +115,7 @@ public class GasEtaActivity extends AppCompatActivity {
 
                 editEtanol.setText("");
                 editGasolina.setText("");
+
                 btnSalvar.setEnabled(false);
 
                 controller.limpar();
@@ -129,6 +143,7 @@ public class GasEtaActivity extends AppCompatActivity {
 
                 combustivelGasolina.setRecomendacao(UtilGasEta.calculadorarMelhorOpcao(precoGasolina, precoEtanol));
                 combustivelEtanol.setRecomendacao(UtilGasEta.calculadorarMelhorOpcao(precoGasolina, precoEtanol));
+
                 controller.salvar(combustivelGasolina);
                 controller.salvar(combustivelEtanol);
 
