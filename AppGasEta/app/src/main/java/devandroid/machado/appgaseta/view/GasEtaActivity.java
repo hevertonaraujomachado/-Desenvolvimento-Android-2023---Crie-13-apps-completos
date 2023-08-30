@@ -59,6 +59,8 @@ public class GasEtaActivity extends AppCompatActivity {
 
         //controller.alterar(objAlteracao);
 
+        controller.deletar(25);
+
         editGasolina = findViewById(R.id.editGasolina);
         editEtanol = findViewById(R.id.editEtanol);
 
@@ -148,8 +150,7 @@ public class GasEtaActivity extends AppCompatActivity {
                 controller.salvar(combustivelEtanol);
 
                 int parada = 0;
-
-
+                
             }
         });
 

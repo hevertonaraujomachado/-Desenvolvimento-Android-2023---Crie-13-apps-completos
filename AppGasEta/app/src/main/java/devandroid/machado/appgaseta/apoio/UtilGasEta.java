@@ -6,6 +6,7 @@ public class UtilGasEta {
     public static void metodoNaoEstatico(){}
 
     public static String mensagem(){
+
         return "Qualquer mensagem...";
     }
 
@@ -14,10 +15,6 @@ public class UtilGasEta {
     }
 
     public static String calculadorarMelhorOpcao(double gasolina, double etanol) {
-        // preço da gasolina: R$ 5,79
-        // preço do etanol: R$ 4,14
-
-        // preco ideal = gasolina * 0,70 = R$ 3,548
 
         double precoIdeal = gasolina * 0.70;
         String mensagemDeRetorno;
