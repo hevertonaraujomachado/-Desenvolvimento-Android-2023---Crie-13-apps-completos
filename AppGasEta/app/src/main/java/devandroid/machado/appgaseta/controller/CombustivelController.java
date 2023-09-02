@@ -14,7 +14,6 @@ public class CombustivelController extends GasEtaDB {
     SharedPreferences preferences;
     SharedPreferences.Editor dadosPreferences;
 
-    //psfs
 
     public static final String NOME_PREFERENCES = "pref_gaseta";
 
@@ -51,20 +50,27 @@ public class CombustivelController extends GasEtaDB {
     public void alterar(Combustivel combustivel) {
 
         ContentValues dados = new ContentValues();
+
         dados.put("id", combustivel.getId());
         dados.put("nomeDoCombustivel", combustivel.getNomeDoCombustivel());
         dados.put("precoDoCombustivel", combustivel.getPrecoDoCombustivel());
         dados.put("recomendacao", combustivel.getRecomendacao());
 
-        alterarObjeto("Combustivel" ,dados);
-
+        alterarObjeto("Combustivel", dados);
 
     }
 
 
-    public void limpar() {
+        public void deletar(int id){
+            deletarObjeto("Combustivel",id);
+        }
 
-        dadosPreferences.clear();
-        dadosPreferences.apply();
+        public void limpar(){
+
+            dadosPreferences.clear();
+            dadosPreferences.apply();
+        }
+
+
     }
-}
+
